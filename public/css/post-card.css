@@ -396,6 +396,29 @@
   color: var(--text-tertiary, #999);
 }
 
+.delete-comment-btn {
+  background: none;
+  border: none;
+  color: var(--error-color, #e74c3c);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: auto;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.delete-comment-btn:hover {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.no-comments {
+  text-align: center;
+  color: var(--text-tertiary, #999);
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
 /* Story Cards */
 .story-card {
   position: relative;

@@ -5,19 +5,19 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
-  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #000;
+  color: #fff;
   transition: background 0.3s ease;
 }
 
 .container {
   max-width: 480px;
   margin: 0 auto;
-  background: white;
+  background: #000;
   min-height: 100vh;
-  transition: background 0.3s ease;
   position: relative;
+  padding-bottom: 70px;
 }
 
 /* Header */
@@ -25,17 +25,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  background: white;
-  border-bottom: 1px solid #e5e5e5;
-  transition: all 0.3s ease;
+  padding: 10px 15px;
+  background: #000;
+  border-bottom: 1px solid #262626;
 }
 
-.header-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
-  transition: color 0.3s ease;
+.header-logo {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 32px;
+  font-weight: 400;
+  color: #fff;
 }
 
 .icon-button {
@@ -43,25 +42,230 @@ body {
   border: none;
   cursor: pointer;
   padding: 8px;
-  color: #1a1a1a;
-  transition: color 0.3s ease;
+  color: #fff;
+  transition: opacity 0.2s;
 }
 
-/* Theme Toggle */
+.icon-button:hover {
+  opacity: 0.7;
+}
 
-/* Navigation Tabs */
+.icon-button svg {
+  width: 26px;
+  height: 26px;
+}
 
-/* Stories */
+/* Stories Section */
+.stories-container {
+  display: flex;
+  gap: 15px;
+  padding: 10px 15px;
+  overflow-x: auto;
+  border-bottom: 1px solid #262626;
+  scrollbar-width: none;
+}
 
-/* Posts */
+.stories-container::-webkit-scrollbar {
+  display: none;
+}
 
-/* Profile */
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-/* Profile Grid */
+.story-item:active {
+  transform: scale(0.95);
+}
 
-/* Edit Profile Form */
+.story-ring {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  position: relative;
+}
 
-/* Create Post */
+.story-ring.no-story {
+  background: #262626;
+}
+
+.story-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 3px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.story-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-add-icon {
+  width: 24px;
+  height: 24px;
+  background: #0095f6;
+  border: 2px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.story-username {
+  font-size: 12px;
+  margin-top: 5px;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* Posts Feed */
+.posts-feed {
+  padding: 0;
+}
+
+/* Post Card (moved to post-card.css) */
+.post-card {
+  background: #000;
+  border-bottom: 1px solid #262626;
+  margin-bottom: 0;
+}
+
+.post-header {
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #333;
+  overflow: hidden;
+}
+
+.post-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-username {
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+
+.post-music {
+  font-size: 11px;
+  color: #a0a0a0;
+}
+
+.post-menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  background: #1a1a1a;
+  display: block;
+}
+
+.post-actions {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-left {
+  display: flex;
+  gap: 15px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+  opacity: 0.7;
+}
+
+.action-btn.liked {
+  color: #ed4956;
+}
+
+.post-likes {
+  padding: 0 15px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.post-caption {
+  padding: 0 15px 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.post-caption-username {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.post-timestamp {
+  padding: 0 15px 12px;
+  font-size: 10px;
+  color: #8e8e8e;
+  text-transform: uppercase;
+}
 
 /* Bottom Navigation */
 .bottom-nav {
@@ -71,12 +275,12 @@ body {
   transform: translateX(-50%);
   max-width: 480px;
   width: 100%;
-  background: white;
-  border-top: 1px solid #e5e7eb;
-  padding: 12px 20px;
+  background: #000;
+  border-top: 1px solid #262626;
+  padding: 8px 0;
   display: flex;
   justify-content: space-around;
-  transition: all 0.3s ease;
+  z-index: 100;
 }
 
 .nav-btn {
@@ -84,31 +288,56 @@ body {
   border: none;
   cursor: pointer;
   padding: 8px;
-  color: #666;
-  transition: color 0.3s ease;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+
+.nav-btn:hover {
+  opacity: 0.7;
 }
 
 .nav-btn.active {
-  color: #6366f1;
+  color: #fff;
 }
 
-/* Search */
-
-/* SVG Icons */
-svg {
-  width: 20px;
-  height: 20px;
+.nav-btn svg {
+  width: 26px;
+  height: 26px;
 }
 
-.icon-button svg {
-  width: 20px;
-  height: 20px;
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+  }
+  
+  .bottom-nav {
+    max-width: 100%;
+  }
 }
 
-/* Notifications Page */
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, #262626 25%, #333 50%, #262626 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s infinite;
+}
 
-/* Settings Page */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
 
-/* Messages Page */
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
 
-/* Search Page */
+/* Dark Mode Native */
+body {
+  color-scheme: dark;
+}
