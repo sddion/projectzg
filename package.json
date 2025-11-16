@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.cjs",
     "dev": "nodemon app.cjs",
-    "build": "tsc"
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "sddion@dedsec",

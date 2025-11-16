@@ -1,7 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "tsc",
+  "buildCommand": "npx tsc",
   "outputDirectory": "public",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
