@@ -37,6 +37,7 @@ out/
 api/**/*.js
 api/**/*.d.ts
 api/**/*.map
+api/
 
 # Temporary files
 tmp/
