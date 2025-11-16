@@ -11,4 +11,3 @@
  * This handler bridges your existing Express API to Vercel's serverless format
  */
 export default function handler(req: any, res: any): Promise<void>;
-//# sourceMappingURL=handler.d.ts.map

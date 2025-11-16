@@ -5,4 +5,3 @@ import { Router } from "express";
  */
 export declare function createApiRouter(): Router;
 export default createApiRouter;
-//# sourceMappingURL=express-adapter.d.ts.map

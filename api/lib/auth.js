@@ -1,8 +1,12 @@
-import { supabase } from "./supabase";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getAuthHeader = getAuthHeader;
+exports.getCommunityProfileId = getCommunityProfileId;
+const supabase_1 = require("./supabase");
 /**
  * Extract and verify JWT token from Authorization header
  */
-export function getAuthHeader(req) {
+function getAuthHeader(req) {
     const auth = req.header("Authorization");
     if (!auth?.startsWith("Bearer ")) {
         return { error: "Unauthorized" };
@@ -19,8 +23,8 @@ export function getAuthHeader(req) {
 /**
  * Get community profile ID from user ID
  */
-export async function getCommunityProfileId(userId) {
-    const { data, error } = await supabase
+async function getCommunityProfileId(userId) {
+    const { data, error } = await supabase_1.supabase
         .from("community_profiles")
         .select("id")
         .eq("user_id", userId)
@@ -30,4 +34,3 @@ export async function getCommunityProfileId(userId) {
     }
     return data.id;
 }
-//# sourceMappingURL=auth.js.map

@@ -32,6 +32,9 @@ dist/
 build/
 .next/ # If Next.js was used for frontend, though it's removed now
 out/
+# Compiled TypeScript (keep source .ts files)
+api/**/*.js
+api/**/*.d.ts
 
 # Temporary files
 tmp/

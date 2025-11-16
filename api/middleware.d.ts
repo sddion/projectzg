@@ -16,4 +16,3 @@ export declare function sendError(res: Response, message: string, status?: numbe
  * Send JSON success response
  */
 export declare function sendSuccess(res: Response, data: any, status?: number): void;
-//# sourceMappingURL=middleware.d.ts.map

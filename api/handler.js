@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = handler;
 /**
  * Vercel Serverless Function Handler
  * This exports a default handler that Vercel will use for each /api/* request
@@ -10,7 +13,7 @@
  *
  * This handler bridges your existing Express API to Vercel's serverless format
  */
-export default async function handler(req, res) {
+async function handler(req, res) {
     // CORS headers
     res.setHeader("Access-Control-Allow-Origin", process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
@@ -27,4 +30,3 @@ export default async function handler(req, res) {
     // Each endpoint file in /api/* will be its own Vercel Function
     res.status(404).json({ error: "Not found" });
 }
-//# sourceMappingURL=handler.js.map

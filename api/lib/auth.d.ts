@@ -10,4 +10,3 @@ export declare function getAuthHeader(req: Request): {
  * Get community profile ID from user ID
  */
 export declare function getCommunityProfileId(userId: string): Promise<string>;
-//# sourceMappingURL=auth.d.ts.map

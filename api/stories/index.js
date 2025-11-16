@@ -1,19 +1,21 @@
-import { Router } from "express";
-import { supabase } from "../lib/supabase";
-import { getAuthHeader, getCommunityProfileId } from "../lib/auth";
-import { sendSuccess, sendError } from "../middleware";
-const router = Router();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const supabase_1 = require("../lib/supabase");
+const auth_1 = require("../lib/auth");
+const middleware_1 = require("../middleware");
+const router = (0, express_1.Router)();
 /**
  * GET /api/stories
  */
 router.get("/", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
-        const communityProfileId = await getCommunityProfileId(auth.userId);
-        const { data, error } = await supabase
+        const communityProfileId = await (0, auth_1.getCommunityProfileId)(auth.userId);
+        const { data, error } = await supabase_1.supabase
             .from("stories")
             .select("*, community_profiles(display_name, username, avatar_url)")
             .eq("author_id", communityProfileId)
@@ -21,10 +23,10 @@ router.get("/", async (req, res) => {
             .order("created_at", { ascending: false });
         if (error)
             throw error;
-        sendSuccess(res, data, 200);
+        (0, middleware_1.sendSuccess)(res, data, 200);
     }
     catch (error) {
-        sendError(res, error.message || "Failed to fetch stories", 400);
+        (0, middleware_1.sendError)(res, error.message || "Failed to fetch stories", 400);
     }
 });
 /**
@@ -32,18 +34,18 @@ router.get("/", async (req, res) => {
  */
 router.post("/", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
         const { image_url, expires_in_hours = 24 } = req.body;
         if (!image_url) {
-            return sendError(res, "image_url is required", 400);
+            return (0, middleware_1.sendError)(res, "image_url is required", 400);
         }
-        const author_id = await getCommunityProfileId(auth.userId);
+        const author_id = await (0, auth_1.getCommunityProfileId)(auth.userId);
         const expiresAt = new Date();
         expiresAt.setHours(expiresAt.getHours() + expires_in_hours);
-        const { data, error } = await supabase
+        const { data, error } = await supabase_1.supabase
             .from("stories")
             .insert([
             {
@@ -55,10 +57,10 @@ router.post("/", async (req, res) => {
             .select();
         if (error)
             throw error;
-        sendSuccess(res, data, 201);
+        (0, middleware_1.sendSuccess)(res, data, 201);
     }
     catch (error) {
-        sendError(res, error.message || "Failed to create story", 400);
+        (0, middleware_1.sendError)(res, error.message || "Failed to create story", 400);
     }
 });
 /**
@@ -66,19 +68,19 @@ router.post("/", async (req, res) => {
  */
 router.get("/following", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
-        const communityProfileId = await getCommunityProfileId(auth.userId);
-        const { data: follows, error: followsError } = await supabase
+        const communityProfileId = await (0, auth_1.getCommunityProfileId)(auth.userId);
+        const { data: follows, error: followsError } = await supabase_1.supabase
             .from("follows")
             .select("following_id")
             .eq("follower_id", communityProfileId);
         if (followsError)
             throw followsError;
         const followedIds = follows?.map((f) => f.following_id) || [];
-        const { data, error } = await supabase
+        const { data, error } = await supabase_1.supabase
             .from("stories")
             .select("*, community_profiles(display_name, username, avatar_url)")
             .in("author_id", followedIds.length > 0 ? followedIds : ["00000000-0000-0000-0000-000000000000"])
@@ -86,10 +88,10 @@ router.get("/following", async (req, res) => {
             .order("created_at", { ascending: false });
         if (error)
             throw error;
-        sendSuccess(res, data, 200);
+        (0, middleware_1.sendSuccess)(res, data, 200);
     }
     catch (error) {
-        sendError(res, error.message || "Failed to fetch stories", 400);
+        (0, middleware_1.sendError)(res, error.message || "Failed to fetch stories", 400);
     }
 });
 /**
@@ -97,25 +99,25 @@ router.get("/following", async (req, res) => {
  */
 router.get("/views", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
         const { story_id } = req.query;
         if (!story_id) {
-            return sendError(res, "story_id is required", 400);
+            return (0, middleware_1.sendError)(res, "story_id is required", 400);
         }
-        const { data, error } = await supabase
+        const { data, error } = await supabase_1.supabase
             .from("story_views")
             .select("*, users(email, display_name, avatar_url)")
             .eq("story_id", story_id)
             .order("viewed_at", { ascending: false });
         if (error)
             throw error;
-        sendSuccess(res, data, 200);
+        (0, middleware_1.sendSuccess)(res, data, 200);
     }
     catch (error) {
-        sendError(res, error.message || "Failed to fetch story views", 400);
+        (0, middleware_1.sendError)(res, error.message || "Failed to fetch story views", 400);
     }
 });
 /**
@@ -123,29 +125,29 @@ router.get("/views", async (req, res) => {
  */
 router.post("/views", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
         const { story_id } = req.body;
         if (!story_id) {
-            return sendError(res, "story_id is required", 400);
+            return (0, middleware_1.sendError)(res, "story_id is required", 400);
         }
         const viewer_id = auth.userId;
-        const { data, error } = await supabase
+        const { data, error } = await supabase_1.supabase
             .from("story_views")
             .insert([{ story_id, viewer_id }])
             .select();
         if (error) {
             if (error.code === "23505") {
-                return sendSuccess(res, { message: "View already recorded" }, 200);
+                return (0, middleware_1.sendSuccess)(res, { message: "View already recorded" }, 200);
             }
             throw error;
         }
-        sendSuccess(res, data, 201);
+        (0, middleware_1.sendSuccess)(res, data, 201);
     }
     catch (error) {
-        sendError(res, error.message || "Failed to mark story as viewed", 400);
+        (0, middleware_1.sendError)(res, error.message || "Failed to mark story as viewed", 400);
     }
 });
 /**
@@ -153,27 +155,26 @@ router.post("/views", async (req, res) => {
  */
 router.delete("/", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
         const { story_id } = req.query;
         if (!story_id) {
-            return sendError(res, "story_id is required", 400);
+            return (0, middleware_1.sendError)(res, "story_id is required", 400);
         }
-        const author_id = await getCommunityProfileId(auth.userId);
-        const { error } = await supabase
+        const author_id = await (0, auth_1.getCommunityProfileId)(auth.userId);
+        const { error } = await supabase_1.supabase
             .from("stories")
             .delete()
             .eq("id", story_id)
             .eq("author_id", author_id);
         if (error)
             throw error;
-        sendSuccess(res, { message: "Story deleted successfully" }, 200);
+        (0, middleware_1.sendSuccess)(res, { message: "Story deleted successfully" }, 200);
     }
     catch (error) {
-        sendError(res, error.message || "Failed to delete story", 400);
+        (0, middleware_1.sendError)(res, error.message || "Failed to delete story", 400);
     }
 });
-export default router;
-//# sourceMappingURL=index.js.map
+exports.default = router;

@@ -1,33 +1,34 @@
-import { Router } from "express";
-import { supabase } from "../lib/supabase";
-import { getAuthHeader } from "../lib/auth";
-import { sendSuccess, sendError } from "../middleware";
-const router = Router();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const supabase_1 = require("../lib/supabase");
+const auth_1 = require("../lib/auth");
+const middleware_1 = require("../middleware");
+const router = (0, express_1.Router)();
 /**
  * GET /api/search
  */
 router.get("/", async (req, res) => {
     try {
-        const auth = getAuthHeader(req);
+        const auth = (0, auth_1.getAuthHeader)(req);
         if (auth.error) {
-            return sendError(res, auth.error, 401);
+            return (0, middleware_1.sendError)(res, auth.error, 401);
         }
         const { q } = req.query;
         const query = q || "";
         if (!query) {
-            return sendSuccess(res, [], 200);
+            return (0, middleware_1.sendSuccess)(res, [], 200);
         }
-        const { data, error } = await supabase
+        const { data, error } = await supabase_1.supabase
             .from("community_profiles")
             .select("id, display_name, username, avatar_url")
             .or(`display_name.ilike.%${query}%, username.ilike.%${query}%`);
         if (error)
             throw error;
-        sendSuccess(res, data, 200);
+        (0, middleware_1.sendSuccess)(res, data, 200);
     }
     catch (error) {
-        sendError(res, error.message || "Search failed", 400);
+        (0, middleware_1.sendError)(res, error.message || "Search failed", 400);
     }
 });
-export default router;
-//# sourceMappingURL=index.js.map
+exports.default = router;
