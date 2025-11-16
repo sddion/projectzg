@@ -7,7 +7,7 @@
   },
   "functions": {
     "app.cjs": {
-      "runtime": "nodejs18.x",
+      "runtime": "nodejs@18.x",
       "memory": 1024,
       "maxDuration": 30,
       "includeFiles": "dist/**",
