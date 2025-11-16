@@ -1,22 +1,21 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": "public",
   "env": {
     "NODE_ENV": "production"
   },
   "functions": {
-    "app.cjs": {
+    "api/handler.js": {
       "memory": 1024,
       "maxDuration": 30,
-      "includeFiles": "dist/**",
-      "excludeFiles": "node_modules/**,api/**/*.js,api/**/*.d.ts"
+      "includeFiles": "api/**"
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "app.cjs"
+      "dest": "/api/handler.js"
     },
     {
       "src": "/(.*)",
