@@ -33,10 +33,10 @@ build/
 .next/
 out/
 
-# Compiled TypeScript output (Vercel will compile these at build time)
-api/**/*.js
-api/**/*.d.ts
-api/**/*.map
+# Compiled TypeScript output (Netlify will compile these at build time)
+netlify-backend/**/*.js
+netlify-backend/**/*.d.ts
+netlify-backend/**/*.map
 
 # Temporary files
 tmp/
@@ -46,6 +46,7 @@ tmp/
 *.bak
 *.orig
 backend/
+api-backup/
 
 # IDE-specific files
 .idea/
