@@ -30,11 +30,13 @@ pids/
 # Build artifacts
 dist/
 build/
-.next/ # If Next.js was used for frontend, though it's removed now
+.next/
 out/
-# Compiled TypeScript (keep source .ts files)
+
+# Compiled TypeScript output (Vercel will compile these at build time)
 api/**/*.js
 api/**/*.d.ts
+api/**/*.map
 
 # Temporary files
 tmp/
