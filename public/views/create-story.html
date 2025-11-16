@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Story - ProjectZG</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/createpost.css" />
+    <script src="/js/authCheck.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <button class="close-btn" onclick="history.back()">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <div class="header-title">Create Story</div>
+        <button
+          id="post-story-btn"
+          class="btn btn-primary"
+          disabled
+          style="
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            background: #6366f1;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+          "
+        >
+          Post
+        </button>
+      </div>
+
+      <div class="create-post" style="padding: 1.5rem">
+        <input
+          type="file"
+          id="story-image-input"
+          accept="image/*"
+          style="display: none"
+        />
+
+        <div
+          id="preview-container"
+          style="display: none; margin-top: 1rem; position: relative"
+        >
+          <img
+            id="story-preview"
+            style="
+              max-width: 100%;
+              border-radius: 12px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            "
+            alt="Story preview"
+          />
+          <button
+            id="change-image-btn"
+            class="btn btn-secondary"
+            style="margin-top: 1rem; width: 100%"
+          >
+            Change Image
+          </button>
+        </div>
+
+        <button
+          id="select-image-btn"
+          style="
+            width: 100%;
+            padding: 4rem 2rem;
+            border: 3px dashed #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+          "
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            style="width: 64px; height: 64px; color: #6366f1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+          <div
+            style="
+              font-size: 1.125rem;
+              font-weight: 600;
+              color: #6366f1;
+              margin-top: 0.5rem;
+            "
+          >
+            Select Image for Story
+          </div>
+          <div style="font-size: 0.875rem; color: #666">
+            Your story will be visible for 24 hours
+          </div>
+        </button>
+
+        <div
+          id="upload-status"
+          style="
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+          "
+        ></div>
+
+        <div
+          style="
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: #666;
+          "
+        >
+          <div style="font-weight: 600; margin-bottom: 0.5rem; color: #333">
+            📌 Tips:
+          </div>
+          <ul style="margin: 0; padding-left: 1.5rem">
+            <li>Choose a high-quality image</li>
+            <li>Image size must be less than 5MB</li>
+            <li>Story will expire after 24 hours</li>
+            <li>You can delete your story anytime</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+      defer
+    ></script>
+    <script src="/js/supabaseClient.js" defer></script>
+    <script src="/js/api.js" defer></script>
+    <script src="/js/create-story.js" defer></script>
+  </body>
+</html>

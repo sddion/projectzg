@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <meta
+            name="description"
+            content="Connect with friends and share moments on ProjectZG"
+        />
+        <meta name="theme-color" content="#6366f1" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="ProjectZG" />
+
+        <title>Login - ProjectZG</title>
+
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="/manifest.json" />
+
+        <!-- Favicon -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/icons/icon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/icons/icon-16x16.png"
+        />
+
+        <!-- Apple Touch Icons -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/icons/icon-192x192.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="/icons/icon-152x152.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="144x144"
+            href="/icons/icon-144x144.png"
+        />
+
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/login.css" />
+        <link rel="stylesheet" href="/css/lazy-loading.css" />
+
+        <!-- Preload critical resources -->
+        <link rel="preload" as="script" href="/js/lazy-loading.js" />
+        <link rel="preload" as="script" href="/js/performance-monitor.js" />
+
+        <style>
+            /* PWA Install Banner Styles */
+            #install-banner {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+                color: white;
+                padding: 16px 20px;
+                box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                display: none;
+                animation: slideUp 0.3s ease-out;
+            }
+
+            @keyframes slideUp {
+                from {
+                    transform: translateY(100%);
+                }
+                to {
+                    transform: translateY(0);
+                }
+            }
+
+            #install-banner.show {
+                display: block;
+            }
+
+            .install-banner-content {
+                max-width: 480px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+            }
+
+            .install-banner-text {
+                flex: 1;
+            }
+
+            .install-banner-text h3 {
+                margin: 0 0 4px 0;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .install-banner-text p {
+                margin: 0;
+                font-size: 13px;
+                opacity: 0.9;
+            }
+
+            .install-banner-actions {
+                display: flex;
+                gap: 8px;
+            }
+
+            .install-btn {
+                padding: 10px 20px;
+                background: white;
+                color: #6366f1;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .install-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            }
+
+            .close-banner-btn {
+                padding: 10px 16px;
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .close-banner-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+        </style>
+
+        <script defer>
+            const session = localStorage.getItem("supabaseSession");
+            if (session) {
+                window.location.href = "/home.html";
+            }
+        </script>
+    </head>
+    <body>
+        <!-- PWA Install Banner -->
+        <div id="install-banner">
+            <div class="install-banner-content">
+                <div class="install-banner-text">
+                    <h3>📱 Install ProjectZG</h3>
+                    <p>Install our app for a better experience!</p>
+                </div>
+                <div class="install-banner-actions">
+                    <button id="install-btn" class="install-btn">
+                        Install
+                    </button>
+                    <button id="close-banner-btn" class="close-banner-btn">
+                        Later
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1 class="auth-title">Welcome to ProjectZG</h1>
+                <p class="auth-subtitle">Log in to continue</p>
+            </div>
+
+            <div class="form">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input
+                        type="email"
+                        class="form-input"
+                        id="email"
+                        placeholder="you@example.com"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                        type="password"
+                        class="form-input"
+                        id="password"
+                        placeholder="••••••••"
+                        required
+                    />
+                </div>
+
+                <button class="btn btn-primary" id="login-btn">Log In</button>
+
+                <div class="separator">or</div>
+
+                <button class="btn btn-google" id="google-login-btn">
+                    <img
+                        src="https://www.svgrepo.com/show/475656/google-color.svg"
+                        alt="Google logo"
+                        class="google-logo"
+                    />
+                    Continue with Google
+                </button>
+
+                <p class="form-link">
+                    Don't have an account? <a href="/signup.html">Sign up</a>
+                </p>
+                <p class="form-link">
+                    <a href="/changepassword.html">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+            defer
+        ></script>
+        <script src="/js/supabaseClient.js" defer></script>
+        <script src="/js/api.js" defer></script>
+        <script src="/js/lazy-loading.js" defer></script>
+        <script src="/js/image-optimizer.js" defer></script>
+        <script src="/js/module-loader.js" defer></script>
+        <script src="/js/performance-monitor.js" defer></script>
+        <script src="/js/login.js" defer></script>
+        <script src="/js/pwa-install.js" defer></script>
+    </body>
+</html>

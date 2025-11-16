@@ -1,0 +1,395 @@
+/**
+ * Skeleton Loaders & Loading States CSS
+ * Provides smooth loading experiences with skeleton screens
+ */
+
+/* Skeleton Loader Base Styles */
+.skeleton-loader {
+  animation: skeleton-pulse 2s infinite;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-color, #e0e0e0) 25%,
+    var(--skeleton-highlight, #f0f0f0) 50%,
+    var(--skeleton-color, #e0e0e0) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s infinite;
+  border-radius: 8px;
+}
+
+.dark-mode .skeleton {
+  background: linear-gradient(
+    90deg,
+    #2a2a2a 25%,
+    #3a3a3a 50%,
+    #2a2a2a 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Text Skeleton */
+.skeleton-text {
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+}
+
+.skeleton-text.large {
+  height: 16px;
+}
+
+/* Avatar Skeleton */
+.skeleton-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Image Skeleton */
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1 / 0.6;
+  border-radius: 12px;
+}
+
+/* Story Skeleton */
+.skeleton-story {
+  width: 80px;
+  gap: 8px;
+}
+
+.skeleton-story .skeleton-avatar {
+  width: 80px;
+  height: 80px;
+}
+
+/* Post Card Skeleton */
+.skeleton-post-card {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color, #e5e5e5);
+}
+
+.dark-mode .skeleton-post-card {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+/* Shimmer Effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  color: var(--text-secondary, #666);
+}
+
+.loading-spinner svg {
+  animation: spin 1s linear infinite;
+  color: var(--primary-color, #6366f1);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulse Animation */
+.pulse {
+  animation: pulse-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-animation {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Bounce Animation */
+.bounce {
+  animation: bounce-animation 1s infinite;
+}
+
+@keyframes bounce-animation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Fade In Animation */
+.fade-in {
+  animation: fade-in-animation 0.5s ease-in-out;
+}
+
+@keyframes fade-in-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide In Animation */
+.slide-in {
+  animation: slide-in-animation 0.3s ease-out;
+}
+
+@keyframes slide-in-animation {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Lazy Loaded Image Styles */
+img.lazy-loaded {
+  animation: fade-in-animation 0.3s ease-in-out;
+}
+
+img.lazy-failed {
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+
+/* Component Loading State */
+.component-loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.component-loaded {
+  animation: fade-in-animation 0.3s ease-in-out;
+}
+
+.component-error {
+  padding: 16px;
+  background: var(--error-bg, #fee);
+  color: var(--error-text, #c33);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.dark-mode .component-error {
+  background: #3a1a1a;
+  color: #ff6b6b;
+}
+
+/* Placeholder Styles */
+.placeholder-image {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+
+.placeholder-text {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s infinite;
+}
+
+.dark-mode .placeholder-text {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+}
+
+/* Blur-up Effect */
+img[data-lazy-src] {
+  transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+img[data-lazy-src]:not(.lazy-loaded) {
+  filter: blur(8px);
+  opacity: 0.8;
+}
+
+/* Loading Bar */
+.loading-bar {
+  height: 4px;
+  background: var(--primary-color, #6366f1);
+  animation: loading-bar-animation 2s ease-in-out infinite;
+}
+
+@keyframes loading-bar-animation {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Skeleton Variations */
+.skeleton-sm {
+  height: 8px;
+}
+
+.skeleton-md {
+  height: 12px;
+}
+
+.skeleton-lg {
+  height: 16px;
+}
+
+.skeleton-xl {
+  height: 20px;
+}
+
+/* Responsive Skeleton Loading */
+@media (max-width: 768px) {
+  .skeleton-loader {
+    gap: 10px;
+  }
+
+  .skeleton-image {
+    aspect-ratio: 1 / 0.8;
+  }
+}
+
+/* Loading States for Buttons */
+button:disabled.loading::after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  vertical-align: middle;
+}
+
+/* Overlay Loading State */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+.loading-overlay.hidden {
+  display: none;
+}
+
+.loading-overlay-content {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.dark-mode .loading-overlay-content {
+  background: #1a1a1a;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.loading-overlay-spinner {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  border: 4px solid var(--border-color, #e5e5e5);
+  border-top-color: var(--primary-color, #6366f1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Skeleton Grid */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.skeleton-grid-item {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color, #e5e5e5);
+}
+
+.dark-mode .skeleton-grid-item {
+  background: #1a1a1a;
+  border-color: #333;
+}

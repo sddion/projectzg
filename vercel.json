@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role",
+    "FRONTEND_URL": "@frontend_url",
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "app.cjs": {
+      "runtime": "nodejs18.x",
+      "memory": 1024,
+      "maxDuration": 30,
+      "includeFiles": "dist/**",
+      "excludeFiles": "node_modules/**"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "app.cjs"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ]
+}

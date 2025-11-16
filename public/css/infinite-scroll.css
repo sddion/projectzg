@@ -1,0 +1,111 @@
+/* Infinite Scroll Styles */
+
+.infinite-scroll-sentinel {
+    height: 1px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.infinite-scroll-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    margin: 1rem 0;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: #6b7280;
+}
+
+.loading-spinner svg {
+    animation: spin 1s linear infinite;
+    color: #3b82f6;
+}
+
+.loading-spinner span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.infinite-scroll-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    margin: 1rem 0;
+}
+
+.end-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #f3f4f6;
+    border-radius: 9999px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.end-message svg {
+    flex-shrink: 0;
+    color: #10b981;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .loading-spinner span {
+        color: #9ca3af;
+    }
+
+    .end-message {
+        background: #374151;
+        color: #9ca3af;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .infinite-scroll-loading,
+    .infinite-scroll-end {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .loading-spinner span,
+    .end-message {
+        font-size: 13px;
+    }
+}
+
+/* Animation for smooth appearance */
+.infinite-scroll-loading,
+.infinite-scroll-end {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

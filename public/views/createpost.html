@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Create Post - Social App</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/createpost.css" />
+        <script src="/js/authCheck.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <button class="close-btn" onclick="location.href='/home.html'">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
+                <div class="header-title">Create Post</div>
+                <div></div>
+            </div>
+
+            <div class="create-post">
+                <div class="create-post-header">
+                    <div class="create-post-avatar" id="create-post-avatar">
+                        <svg
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
+                        </svg>
+                    </div>
+                    <div class="create-post-info">
+                        <div class="create-post-name"></div>
+                    </div>
+                </div>
+
+                <textarea
+                    class="textarea"
+                    id="post-content"
+                    placeholder="What's on your mind? Use @username to mention someone"
+                    data-mentions="true"
+                ></textarea>
+
+                <div id="image-preview-container" style="display: none">
+                    <img id="image-preview" src="" alt="Preview" />
+                    <button id="remove-image-btn" type="button">✕</button>
+                </div>
+
+                <div class="create-post-actions">
+                    <input
+                        type="file"
+                        id="post-image-file"
+                        accept="image/*"
+                        style="display: none"
+                    />
+                    <button
+                        class="icon-btn"
+                        id="upload-image-btn"
+                        title="Upload Image"
+                    >
+                        <svg
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                            />
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                        </svg>
+                    </button>
+                    <span
+                        id="upload-status"
+                        style="font-size: 0.875rem; color: #666"
+                    ></span>
+                </div>
+
+                <button
+                    class="btn btn-primary"
+                    id="create-post-btn"
+                    style="width: 100%; margin-top: 20px"
+                >
+                    Post
+                </button>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+            defer
+        ></script>
+        <script src="/js/supabaseClient.js" defer></script>
+        <script src="/js/api.js" defer></script>
+        <script src="/js/mention-autocomplete.js" defer></script>
+        <script src="/js/createpost.js" defer></script>
+    </body>
+</html>

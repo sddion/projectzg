@@ -1,0 +1,184 @@
+/* Pull-to-Refresh Styles */
+
+.pull-to-refresh-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffffff, #f9fafb);
+    z-index: 9999;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+}
+
+.ptr-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ptr-spinner,
+.ptr-arrow {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3b82f6;
+}
+
+.ptr-spinner {
+    display: none;
+}
+
+.ptr-arrow {
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ptr-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* States */
+
+.pull-to-refresh-indicator.ptr-ready .ptr-text {
+    color: #3b82f6;
+}
+
+.pull-to-refresh-indicator.ptr-refreshing .ptr-spinner {
+    display: block;
+    animation: ptr-spin 1s linear infinite;
+}
+
+.pull-to-refresh-indicator.ptr-refreshing .ptr-arrow {
+    display: none;
+}
+
+.pull-to-refresh-indicator.ptr-success .ptr-spinner svg {
+    color: #10b981;
+}
+
+.pull-to-refresh-indicator.ptr-success .ptr-text {
+    color: #10b981;
+}
+
+.pull-to-refresh-indicator.ptr-error .ptr-spinner svg {
+    color: #ef4444;
+}
+
+.pull-to-refresh-indicator.ptr-error .ptr-text {
+    color: #ef4444;
+}
+
+/* Animations */
+
+@keyframes ptr-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ptr-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Dark mode support */
+
+@media (prefers-color-scheme: dark) {
+    .pull-to-refresh-indicator {
+        background: linear-gradient(to bottom, #1f2937, #111827);
+    }
+
+    .ptr-text {
+        color: #9ca3af;
+    }
+
+    .pull-to-refresh-indicator.ptr-ready .ptr-text {
+        color: #60a5fa;
+    }
+
+    .ptr-spinner,
+    .ptr-arrow {
+        color: #60a5fa;
+    }
+}
+
+/* Mobile optimizations */
+
+@media (max-width: 480px) {
+    .ptr-spinner,
+    .ptr-arrow {
+        width: 28px;
+        height: 28px;
+    }
+
+    .ptr-text {
+        font-size: 13px;
+    }
+}
+
+/* Prevent text selection during pull */
+
+.pull-to-refresh-indicator * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Smooth appearance */
+
+.pull-to-refresh-indicator.ptr-ready {
+    animation: ptr-pulse 1s ease-in-out;
+}
+
+@keyframes ptr-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Loading state animation */
+
+.pull-to-refresh-indicator.ptr-refreshing .ptr-content {
+    animation: ptr-bounce 1.5s ease-in-out infinite;
+}
+
+/* Success checkmark animation */
+
+.pull-to-refresh-indicator.ptr-success .ptr-spinner svg path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: ptr-checkmark 0.5s ease-out forwards;
+}
+
+@keyframes ptr-checkmark {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

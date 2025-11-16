@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - ProjectZG</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1 class="auth-title">Welcome to ProjectZG</h1>
+        <p class="auth-subtitle">Log in to continue</p>
+      </div>
+
+      <!-- Error container for validation messages -->
+      <div id="error-container" style="display: none; margin-bottom: 20px;"></div>
+
+      <form class="form" id="login-form">
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input 
+            type="email" 
+            class="form-input" 
+            id="email"
+            name="email"
+            placeholder="you@example.com" 
+            required 
+          />
+          <small class="form-error" style="display: none;"></small>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input 
+            type="password" 
+            class="form-input" 
+            id="password"
+            name="password"
+            placeholder="••••••••" 
+            required 
+          />
+          <small class="form-error" style="display: none;"></small>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="login-btn">
+          Log In
+        </button>
+      </form>
+
+      <div class="separator">or</div>
+
+      <button class="btn btn-google" id="google-login-btn">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" class="google-logo" />
+        Continue with Google
+      </button>
+
+      <p class="form-link">
+        Don't have an account? <a href="/signup.html">Sign up</a>
+      </p>
+      <p class="form-link">
+        <a href="/changepassword.html?mode=forgot">Forgot password?</a>
+      </p>
+    </div>
+
+    <!-- Zod (validation library) from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/zod@3.22.4/index.umd.js"></script>
+
+    <!-- Supabase Auth -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <!-- Project Scripts -->
+    <script src="/js/supabaseClient.js" defer></script>
+    <script src="/js/api.js" defer></script>
+    <script src="/js/utils/helpers.js" defer></script>
+    <script src="/js/validators.js" defer></script>
+    <script src="/js/toast.js" defer></script>
+    <script src="/js/login.js" defer></script>
+  </body>
+</html>
+

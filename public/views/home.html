@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Following - Social App</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/home.css" />
+        <link rel="stylesheet" href="/css/post-card.css" />
+        <link rel="stylesheet" href="/css/lazy-loading.css" />
+        <link rel="preload" as="script" href="/js/lazy-loading.js" />
+        <link rel="preload" as="script" href="/js/performance-monitor.js" />
+        <script src="/js/authCheck.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <button
+                    class="icon-button"
+                    onclick="location.href='/createpost.html'"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        style="width: 24px; height: 24px"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 4v16m8-8H4"
+                        />
+                    </svg>
+                </button>
+                <div class="header-title">ProjectZG</div>
+                <button
+                    class="icon-button"
+                    onclick="location.href='/notifications.html'"
+                >
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            <div
+                class="stories-container"
+                style="
+                    display: flex;
+                    gap: 1rem;
+                    overflow-x: auto;
+                    padding: 1rem;
+                "
+            >
+                <!-- Add Story Button -->
+                <div
+                    class="story add-story-btn"
+                    style="cursor: pointer; position: relative; flex-shrink: 0"
+                >
+                    <div
+                        class="story-avatar"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #667eea 0%,
+                                #764ba2 100%
+                            );
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: 3px dashed #fff;
+                        "
+                    >
+                        <svg
+                            fill="white"
+                            viewBox="0 0 24 24"
+                            style="width: 32px; height: 32px"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4v16m8-8H4"
+                            />
+                        </svg>
+                    </div>
+                    <div class="story-label">Add Story</div>
+                </div>
+
+                <!-- Following Stories Container -->
+                <div
+                    id="following-stories-container"
+                    style="display: flex; gap: 1rem"
+                >
+                    <!-- Stories will be loaded here by JavaScript -->
+                </div>
+            </div>
+
+            <div id="following-posts-container" class="posts-container">
+                <!-- Posts will be loaded here by JavaScript -->
+            </div>
+
+            <div class="bottom-nav">
+                <button
+                    class="nav-btn active"
+                    onclick="location.href='/home.html'"
+                >
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="location.href='/feeds.html'">
+                    <img
+                        src="/image/communityicon.png"
+                        alt="Community"
+                        style="width: 24px; height: 24px"
+                    />
+                </button>
+                <button class="nav-btn" onclick="location.href='/search.html'">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="location.href='/profile.html'">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+            defer
+        ></script>
+        <script src="/js/supabaseClient.js" defer></script>
+        <script src="/js/api.js" defer></script>
+        <script src="/js/lazy-loading.js" defer></script>
+        <script src="/js/image-optimizer.js" defer></script>
+        <script src="/js/module-loader.js" defer></script>
+        <script src="/js/performance-monitor.js" defer></script>
+        <script src="/js/features.js" defer></script>
+        <script src="/js/post-renderer.js" defer></script>
+        <script src="/js/home.js" defer></script>
+    </body>
+</html>
