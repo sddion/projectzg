@@ -7,11 +7,10 @@
   },
   "functions": {
     "app.cjs": {
-
       "memory": 1024,
       "maxDuration": 30,
       "includeFiles": "dist/**",
-      "excludeFiles": "node_modules/**"
+      "excludeFiles": "node_modules/**,api/**/*.js,api/**/*.d.ts"
     }
   },
   "routes": [
