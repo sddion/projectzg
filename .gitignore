@@ -37,6 +37,8 @@ out/
 api/**/*.js
 api/**/*.d.ts
 api/**/*.map
+netlify-backend/**/*.d.ts
+api-backup/**/*.d.ts
 
 # Temporary files
 tmp/
