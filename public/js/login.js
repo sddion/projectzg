@@ -84,10 +84,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   /**
    * Handle OAuth callback
+   * After Google OAuth, user arrives at login.html with access token in hash
+   * We need to complete the session and then check if profile exists
    */
   async function handleOAuthCallback() {
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const accessToken = hashParams.get("access_token");
+    const errorCode = hashParams.get("error");
+
+    if (errorCode) {
+      const errorDescription = hashParams.get("error_description") || "OAuth error occurred";
+      console.error("OAuth error:", errorCode, errorDescription);
+      displayErrors({ general: errorDescription });
+      return;
+    }
 
     if (!accessToken) return;
 
@@ -99,6 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (session) {
         localStorage.setItem("supabaseSession", JSON.stringify(session));
+        // Handle redirect based on profile status
         await handlePostLoginRedirect(session.user.id);
       } else if (error) {
         console.error("OAuth error:", error);

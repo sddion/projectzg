@@ -43,22 +43,50 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
       try {
+        // Sign out from Supabase on server side
         const response = await apiRequest("/auth/signout", {
           method: "POST",
         });
 
-        if (response.ok) {
-          localStorage.removeItem("supabaseSession");
-          localStorage.removeItem("theme"); // Clear theme preference as well
-          alert("Logged out successfully!");
-          window.location.href = "login.html";
-        } else {
-          const errorData = await response.json();
-          alert("Logout failed: " + errorData.error);
+        // Clear session on client side regardless of server response
+        // This ensures complete logout even if server has issues
+        if (typeof supabase !== "undefined" && supabase.auth) {
+          await supabase.auth.signOut();
         }
+
+        // Clear all auth-related data from localStorage
+        localStorage.removeItem("supabaseSession");
+        
+        // Clear all other stored data that might allow auto-restore
+        const keysToRemove = Object.keys(localStorage).filter(key => 
+          key.includes("supabase") || 
+          key.includes("auth") || 
+          key.includes("session")
+        );
+        keysToRemove.forEach(key => localStorage.removeItem(key));
+
+        // Don't clear theme - user may prefer dark mode even when logged out
+        // localStorage.removeItem("theme");
+
+        alert("Logged out successfully!");
+        window.location.href = "/login.html";
       } catch (error) {
         console.error("Error during logout:", error);
-        alert("An error occurred during logout. Please try again.");
+        
+        // Force logout locally even if API call fails
+        if (typeof supabase !== "undefined" && supabase.auth) {
+          await supabase.auth.signOut();
+        }
+        localStorage.removeItem("supabaseSession");
+        const keysToRemove = Object.keys(localStorage).filter(key => 
+          key.includes("supabase") || 
+          key.includes("auth") || 
+          key.includes("session")
+        );
+        keysToRemove.forEach(key => localStorage.removeItem(key));
+        
+        alert("Logged out. Please refresh if issues persist.");
+        window.location.href = "/login.html";
       }
     });
   }

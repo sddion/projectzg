@@ -38,7 +38,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     currentSession = JSON.parse(session);
 
-    // Pre-fill display name from Google account if available
+    // Check if user already has a community profile
+    try {
+      const response = await apiRequest(`/profile/${currentSession.user.id}`);
+      if (response.ok) {
+        // Profile already exists, user shouldn't be on this page
+        console.log("[PROFILE] User already has profile, redirecting to home");
+        window.location.href = "/home.html";
+        return;
+      }
+      // 404 is expected (no profile yet), continue to profile creation form
+    } catch (error) {
+      console.error("Error checking existing profile:", error);
+      // If we can't check, assume no profile and let them continue
+    }
+
+    // Pre-fill display name from OAuth account metadata if available
     if (currentSession.user?.user_metadata?.full_name) {
       displayNameInput.value = currentSession.user.user_metadata.full_name;
     } else if (currentSession.user?.user_metadata?.name) {
@@ -54,18 +69,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         .replace(/[^a-zA-Z0-9_]/g, "")
         .toLowerCase();
       usernameInput.placeholder = suggestedUsername;
-    }
-
-    // Check if user already has a community profile
-    try {
-      const response = await apiRequest(`/profile/${currentSession.user.id}`);
-      if (response.ok) {
-        // Profile already exists, redirect to home
-        window.location.href = "/home.html";
-        return;
-      }
-    } catch (error) {
-      console.log("No existing profile found, continuing...");
     }
   } catch (error) {
     console.error("Error checking authentication:", error);
@@ -91,20 +94,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Validate format
     if (!/^[a-zA-Z0-9_]+$/.test(username)) {
       usernameFeedback.textContent =
-        "❌ Only letters, numbers, and underscores allowed";
+        " Only letters, numbers, and underscores allowed";
       usernameFeedback.style.color = "#e74c3c";
       return;
     }
 
     if (username.length < 3) {
       usernameFeedback.textContent =
-        "❌ Username must be at least 3 characters";
+        " Username must be at least 3 characters";
       usernameFeedback.style.color = "#e74c3c";
       return;
     }
 
     // Check availability (debounced)
-    usernameFeedback.textContent = "⏳ Checking availability...";
+    usernameFeedback.textContent = "Checking availability...";
     usernameFeedback.style.color = "#666";
 
     usernameCheckTimeout = setTimeout(async () => {
@@ -120,16 +123,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           );
 
           if (exactMatch) {
-            usernameFeedback.textContent = "❌ Username is already taken";
+            usernameFeedback.textContent = "Username is already taken";
             usernameFeedback.style.color = "#e74c3c";
           } else {
-            usernameFeedback.textContent = "✅ Username is available!";
+            usernameFeedback.textContent = "Username is available!";
             usernameFeedback.style.color = "#27ae60";
           }
         }
       } catch (error) {
         console.error("Error checking username:", error);
-        usernameFeedback.textContent = "⚠️ Could not verify availability";
+        usernameFeedback.textContent = "Could not verify availability";
         usernameFeedback.style.color = "#f39c12";
       } finally {
         isChecking = false;
@@ -193,7 +196,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
           const data = await response.json();
           console.log("Profile created successfully:", data);
-          alert("Profile created successfully! Welcome to ProjectZG! 🎉");
+          alert("Profile created successfully! Welcome to ProjectZG!");
           window.location.href = "/home.html";
         } catch (jsonError) {
           console.error("JSON parse error:", jsonError);

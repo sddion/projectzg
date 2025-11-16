@@ -135,6 +135,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   /**
    * Handle Google signup
+   * Redirect to login page after Google auth completes
+   * Login page will handle checking profile status
    */
   async function handleGoogleSignup() {
     if (isLoading) return;
@@ -144,16 +146,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: {
+          redirectTo: window.location.origin + "/login.html",
+        },
       });
 
       if (error) {
         const errorMsg = `Error signing up with Google: ${error.message}`;
         toast?.error?.(errorMsg) || alert(errorMsg);
+        displayErrors({ general: errorMsg });
       }
     } catch (error) {
-      console.error('Error signing up with Google:', error);
-      const errorMsg = error.message || 'An error occurred. Please try again.';
+      console.error("Error signing up with Google:", error);
+      const errorMsg = error.message || "An error occurred. Please try again.";
       toast?.error?.(errorMsg) || alert(errorMsg);
+      displayErrors({ general: errorMsg });
     } finally {
       isLoading = false;
     }
